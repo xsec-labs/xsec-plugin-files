@@ -35,17 +35,17 @@ export const themeStyles = `
   --ui-accent-soft: color-mix(in srgb, var(--ui-accent) 14%, transparent);
   --ui-accent-hover: color-mix(in srgb, var(--ui-accent) 88%, var(--ui-text));
   --ui-faint: color-mix(in srgb, var(--ui-muted) 72%, var(--ui-surface));
-  --ui-hairline: color-mix(in srgb, var(--ui-border) 70%, transparent);
+  --ui-hairline: color-mix(in srgb, var(--ui-text) 10%, transparent);
   --ui-danger-soft: color-mix(in srgb, var(--ui-danger) 12%, transparent);
   --ui-success-soft: color-mix(in srgb, var(--ui-success) 14%, transparent);
   --ui-warning-soft: color-mix(in srgb, var(--ui-warning) 16%, transparent);
   --ui-shadow: 0 8px 24px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 8%);
-  --ui-font: var(--xsec-font-family, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif);
-  --ui-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --ui-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --ui-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
   --ui-ease: cubic-bezier(.2, 0, 0, 1);
   background: var(--ui-surface);
   color: var(--ui-text);
-  font: 13px/1.5 var(--ui-font);
+  font: 14px/1.45 var(--ui-font);
   -webkit-font-smoothing: antialiased;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -56,10 +56,10 @@ button { -webkit-tap-highlight-color: transparent; }
 ::selection { background: color-mix(in srgb, var(--ui-accent) 28%, transparent); }
 * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--ui-muted) 40%, transparent) transparent; }
 
-/* 按钮：默认灰底，主操作强调色实心，图标按钮透明底。高度 28，与 Desktop 面板的紧凑密度一致。 */
+/* 按钮：默认灰底，主操作强调色实心，图标按钮透明底。高度 32，与 Desktop 的紧凑密度一致。 */
 .ui-button {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  height: 28px; padding: 0 10px; border: 0; border-radius: var(--ui-radius);
+  height: 32px; padding: 0 12px; border: 0; border-radius: var(--ui-radius);
   background: var(--ui-subtle); color: var(--ui-text); font-weight: 500; white-space: nowrap; cursor: pointer;
   transition: background-color .12s var(--ui-ease), color .12s var(--ui-ease), opacity .12s var(--ui-ease);
 }
@@ -70,18 +70,18 @@ button { -webkit-tap-highlight-color: transparent; }
 .ui-button.is-primary:hover:not(:disabled) { background: var(--ui-accent-hover); }
 .ui-button.is-ghost { background: transparent; color: var(--ui-muted); }
 .ui-button.is-ghost:hover:not(:disabled) { background: var(--ui-hover); color: var(--ui-text); }
-.ui-button.is-icon { width: 28px; padding: 0; }
+.ui-button.is-icon { width: 32px; padding: 0; }
 .ui-button[aria-busy="true"] svg { animation: ui-spin .9s linear infinite; }
 .ui-button svg { flex: 0 0 auto; }
 
 /* 提示条只用于错误；成功的确认用底部的状态气泡。 */
 .ui-notice {
-  display: flex; align-items: flex-start; gap: 8px; margin: 8px 12px 0; padding: 8px 10px;
+  display: flex; align-items: flex-start; gap: 8px; margin: 8px 12px 0; padding: 8px 12px;
   border-radius: var(--ui-radius); background: var(--ui-danger-soft); color: var(--ui-danger); overflow-wrap: anywhere;
 }
 .ui-notice svg { flex: 0 0 auto; margin-top: 2px; }
 .ui-notice span { flex: 1; min-width: 0; }
-.ui-notice .ui-button { height: 24px; margin: -2px 0; background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
+.ui-notice .ui-button { height: 26px; padding: 0 8px; font-size: 12px; margin: -2px 0; background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
 .ui-toast {
   position: fixed; left: 50%; bottom: 16px; z-index: 5; transform: translateX(-50%);
   display: flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); padding: 7px 12px 7px 10px;

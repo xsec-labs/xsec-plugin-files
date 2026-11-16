@@ -55,6 +55,7 @@ function codeRows(controller) {
   table.setAttribute("role", "table");
   const preview = previewLines(controller.state.content);
   const pattern = grammarFor(controller.state.selected.name);
+  table.style.setProperty("--line-digits", String(String(preview.lines.length).length));
   preview.lines.forEach((code, index) => {
     const lineNumber = index + 1;
     const line = element("div", `project-file-line${controller.state.commentLine === lineNumber ? " is-commenting" : ""}`);
