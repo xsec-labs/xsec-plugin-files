@@ -37,7 +37,7 @@ export const styles = `${themeStyles}
 .file-tree-icon { display: grid; place-items: center; }
 .file-tree-icon.is-directory { color: var(--ui-accent-text); }
 .file-tree-name { overflow: hidden; color: var(--ui-text); text-overflow: ellipsis; white-space: nowrap; }
-.file-tree-metadata { color: var(--ui-faint); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.file-tree-metadata { color: var(--ui-muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .file-tree-add-action { margin-right: 2px; opacity: 0; }
 .file-tree-add-action.ui-button { width: 26px; height: 26px; padding: 0; }
 .file-tree-row:hover .file-tree-add-action,
@@ -56,7 +56,7 @@ export const styles = `${themeStyles}
 .project-file-title { display: grid; flex: 1; min-width: 0; line-height: 1.25; }
 .project-file-title strong { overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .project-file-title small {
-  overflow: hidden; color: var(--ui-faint); direction: rtl; font: 12px/1.3 var(--ui-mono);
+  overflow: hidden; color: var(--ui-muted); direction: rtl; font: 12px/1.3 var(--ui-mono);
   text-align: left; text-overflow: ellipsis; white-space: nowrap;
 }
 .project-file-title small bdi { direction: ltr; }
@@ -77,10 +77,10 @@ export const styles = `${themeStyles}
 }
 .project-file-line:hover .file-line-comment-trigger:not(:disabled), .file-line-comment-trigger:focus-visible { opacity: 1; pointer-events: auto; }
 .file-line-comment-trigger:hover { transform: scale(1.12); }
-.file-line-number { padding: 0 12px 0 6px; color: var(--ui-faint); font-variant-numeric: tabular-nums; text-align: right; user-select: none; }
+.file-line-number { padding: 0 12px 0 6px; color: var(--ui-muted); font-variant-numeric: tabular-nums; text-align: right; user-select: none; }
 .project-file-line.is-commenting .file-line-number { color: var(--ui-accent-text); }
 .project-file-line code { padding-right: 16px; color: var(--ui-text); font: inherit; white-space: pre; }
-.tok-comment { color: var(--ui-faint); font-style: italic; }
+.tok-comment { color: var(--ui-muted); font-style: italic; }
 .tok-string { color: var(--ui-success); }
 .tok-number { color: var(--ui-warning); }
 .tok-keyword { color: var(--ui-accent-text); }
@@ -99,11 +99,11 @@ export const styles = `${themeStyles}
   border-radius: var(--ui-radius); background: var(--ui-subtle); color: var(--ui-text); line-height: 1.5;
   transition: border-color .12s var(--ui-ease), background-color .12s var(--ui-ease);
 }
-.file-line-comment-editor textarea::placeholder { color: var(--ui-faint); }
+.file-line-comment-editor textarea::placeholder { color: var(--ui-muted); }
 .file-line-comment-editor textarea:focus { border-color: var(--ui-accent-text); background: var(--ui-surface); outline: 0; }
 .file-line-comment-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .file-line-comment-footer .ui-button:first-of-type { margin-left: auto; }
-.file-line-comment-footer kbd { color: var(--ui-faint); font: 11px/1 var(--ui-font); }
+.file-line-comment-footer kbd { color: var(--ui-muted); font: 11px/1 var(--ui-font); }
 .project-file-truncated { margin: 0; padding: 10px 16px 56px; border-top: 1px solid var(--ui-hairline); color: var(--ui-muted); font-size: 12px; text-align: center; }
 
 @media (hover: none) {

@@ -44,6 +44,10 @@ function text(value,label){if(typeof value!="string"||!value)throw new Error(`${
   font: 14px/1.45 var(--ui-font);
   -webkit-font-smoothing: antialiased;
 }
+/* 强调色上的文字按强调色的明度取白或黑。声明里带 var()，旧 WebView 要到计算值时才失效，所以必须包在 @supports 里。 */
+@supports (color: oklch(from red l c h)) {
+  :root { --ui-on-accent: oklch(from var(--ui-accent) clamp(0, (.65 - l) * 1000, 1) 0 0); }
+}
 *, *::before, *::after { box-sizing: border-box; }
 html, body, [data-xsec-plugin-root] { min-width: 0; min-height: 100%; margin: 0; }
 button, textarea, input { font: inherit; color: inherit; }
@@ -86,6 +90,19 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .ui-toast svg { flex: 0 0 auto; color: var(--ui-success); }
 .ui-toast span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ⓘ：悬停、键盘聚焦或点按时展开说明。 */
+.ui-info {
+  position: relative; display: grid; flex: 0 0 auto; width: 24px; height: 24px; place-items: center; padding: 0; border: 0;
+  border-radius: 50%; background: transparent; color: var(--ui-muted); cursor: help;
+}
+.ui-info:hover, .ui-info[aria-expanded="true"] { background: var(--ui-hover); color: var(--ui-text); }
+.ui-info-tip {
+  display: none; position: absolute; top: calc(100% + 6px); left: 0; z-index: 6; width: max-content; max-width: min(240px, 70vw);
+  padding: 6px 10px; border: 1px solid var(--ui-hairline); border-radius: var(--ui-radius); background: var(--ui-surface);
+  color: var(--ui-text); box-shadow: var(--ui-shadow); font-size: 12px; font-weight: 400; line-height: 1.5; text-align: left; white-space: normal;
+}
+.ui-info:hover .ui-info-tip, .ui-info:focus-visible .ui-info-tip, .ui-info[aria-expanded="true"] .ui-info-tip { display: block; }
 
 .ui-empty { display: grid; justify-items: center; align-content: center; gap: 10px; min-height: 220px; padding: 32px 24px; color: var(--ui-muted); text-align: center; }
 .ui-empty-mark { display: grid; width: 40px; height: 40px; place-items: center; border-radius: var(--ui-radius-panel); background: var(--ui-subtle); color: var(--ui-muted); }
@@ -146,7 +163,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .file-tree-icon { display: grid; place-items: center; }
 .file-tree-icon.is-directory { color: var(--ui-accent-text); }
 .file-tree-name { overflow: hidden; color: var(--ui-text); text-overflow: ellipsis; white-space: nowrap; }
-.file-tree-metadata { color: var(--ui-faint); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.file-tree-metadata { color: var(--ui-muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .file-tree-add-action { margin-right: 2px; opacity: 0; }
 .file-tree-add-action.ui-button { width: 26px; height: 26px; padding: 0; }
 .file-tree-row:hover .file-tree-add-action,
@@ -165,7 +182,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .project-file-title { display: grid; flex: 1; min-width: 0; line-height: 1.25; }
 .project-file-title strong { overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .project-file-title small {
-  overflow: hidden; color: var(--ui-faint); direction: rtl; font: 12px/1.3 var(--ui-mono);
+  overflow: hidden; color: var(--ui-muted); direction: rtl; font: 12px/1.3 var(--ui-mono);
   text-align: left; text-overflow: ellipsis; white-space: nowrap;
 }
 .project-file-title small bdi { direction: ltr; }
@@ -186,10 +203,10 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .project-file-line:hover .file-line-comment-trigger:not(:disabled), .file-line-comment-trigger:focus-visible { opacity: 1; pointer-events: auto; }
 .file-line-comment-trigger:hover { transform: scale(1.12); }
-.file-line-number { padding: 0 12px 0 6px; color: var(--ui-faint); font-variant-numeric: tabular-nums; text-align: right; user-select: none; }
+.file-line-number { padding: 0 12px 0 6px; color: var(--ui-muted); font-variant-numeric: tabular-nums; text-align: right; user-select: none; }
 .project-file-line.is-commenting .file-line-number { color: var(--ui-accent-text); }
 .project-file-line code { padding-right: 16px; color: var(--ui-text); font: inherit; white-space: pre; }
-.tok-comment { color: var(--ui-faint); font-style: italic; }
+.tok-comment { color: var(--ui-muted); font-style: italic; }
 .tok-string { color: var(--ui-success); }
 .tok-number { color: var(--ui-warning); }
 .tok-keyword { color: var(--ui-accent-text); }
@@ -208,11 +225,11 @@ button { -webkit-tap-highlight-color: transparent; }
   border-radius: var(--ui-radius); background: var(--ui-subtle); color: var(--ui-text); line-height: 1.5;
   transition: border-color .12s var(--ui-ease), background-color .12s var(--ui-ease);
 }
-.file-line-comment-editor textarea::placeholder { color: var(--ui-faint); }
+.file-line-comment-editor textarea::placeholder { color: var(--ui-muted); }
 .file-line-comment-editor textarea:focus { border-color: var(--ui-accent-text); background: var(--ui-surface); outline: 0; }
 .file-line-comment-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .file-line-comment-footer .ui-button:first-of-type { margin-left: auto; }
-.file-line-comment-footer kbd { color: var(--ui-faint); font: 11px/1 var(--ui-font); }
+.file-line-comment-footer kbd { color: var(--ui-muted); font: 11px/1 var(--ui-font); }
 .project-file-truncated { margin: 0; padding: 10px 16px 56px; border-top: 1px solid var(--ui-hairline); color: var(--ui-muted); font-size: 12px; text-align: center; }
 
 @media (hover: none) {
